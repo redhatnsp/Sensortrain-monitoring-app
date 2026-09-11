@@ -27,4 +27,10 @@ public class CommandController {
     public void stopCapture(String command) {
         commandEmitter.send(command);
     }
+
+    @POST
+    @Path("/connectReconnect")
+    public void connectReconnect(String command) {
+        commandEmitter.send(command);
+    }
 }
