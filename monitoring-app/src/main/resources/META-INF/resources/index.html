@@ -41,13 +41,49 @@
                     <span class="button-82-front text">
                       Connect/Reconnect Train
                     </span>
+                </button>
+			<div id="button-frame4">
+                <button onclick="connectReconnect()" class="button-82-pushable" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                      Stop Train Movement
+                    </span>
+                </button>
+			<div id="button-frame5">
+                <button onclick="connectReconnect()" class="button-82-pushable" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+		      Start Train Movement
+                    </span>
                   </button>
             </div>
         </div>
     </div>
 
     <script>
-        function startCapture() {
+        function startMovement() {
+            // Call the first POST URL
+            fetch('/capture/startMovement', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: "startMovement" })
+             });
+        }
+        function stopMovement() {
+            // Call the first POST URL
+            fetch('/capture/stopMovement', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: "stopMovement" })
+             });
+        }
+      function startCapture() {
             // Call the first POST URL
             fetch('/capture/start', {
                 method: 'POST',
