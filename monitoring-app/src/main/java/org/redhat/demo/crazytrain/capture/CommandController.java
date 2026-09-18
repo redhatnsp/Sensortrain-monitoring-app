@@ -33,4 +33,14 @@ public class CommandController {
     public void connectReconnect(String command) {
         commandEmitter.send(command);
     }
+     @POST
+    @Path("/startMovement")
+    public void startMovement(String command) {
+        commandEmitter.send(command);
+     }
+    @POST
+    @Path("/stopMovement")
+    public void stopMovement(String command) {
+        commandEmitter.send(command);
+    }
 }
