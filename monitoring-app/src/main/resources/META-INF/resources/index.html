@@ -1,122 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <title>ShadowTrain Monitor</title>
 </head>
 <body>
     <div id="frame-container">
         <div id="header">
             <h1>ShadowTrain Monitor</h1>
-			<img id="train-id" src="train.png" alt="Train image">
+            <img id="train-id" src="train.png" alt="Train image">
         </div>
+        
         <div id="image-frame">
             <img id="stream-image" src="empty-state.png" alt="Stream image">
         </div>
+        <!--
         <div id="commands-container">
-            <img id="commands" src="commands.png">
+            <img id="commands" src="commands.png" alt="Commands graphic">
         </div>
+        -->
+        <!-- Properly structured flex container -->
         <div id="button-frame">
             <div id="button-frame1">
-                <button onclick="startCapture()" class="button-82-pushable" role="button">
+                <button onclick="startCapture()" class="button-82-pushable" type="button">
                     <span class="button-82-shadow"></span>
                     <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                      Start Camera
-                    </span>
-                  </button>
+                    <span class="button-82-front text">Start Camera</span>
+                </button>
             </div>
+            
             <div id="button-frame2">
-                <button onclick="stopCapture()" class="button-82-pushable" role="button">
+                <button onclick="stopCapture()" class="button-82-pushable" type="button">
                     <span class="button-82-shadow"></span>
                     <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                      Stop Camera
-                    </span>
-                  </button>
-			</div>
-			<div id="button-frame3">
-                <button onclick="connectReconnect()" class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                      Connect/Reconnect Train
-                    </span>
+                    <span class="button-82-front text">Stop Camera</span>
                 </button>
-			<div id="button-frame4">
-                <button onclick="connectReconnect()" class="button-82-pushable" role="button">
+            </div>
+            
+            <div id="button-frame3">
+                <button onclick="connectReconnect()" class="button-82-pushable" type="button">
                     <span class="button-82-shadow"></span>
                     <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                      Stop Train Movement
-                    </span>
+                    <span class="button-82-front text">Connect/Reconnect Train</span>
                 </button>
-			<div id="button-frame5">
-                <button onclick="connectReconnect()" class="button-82-pushable" role="button">
+            </div>
+            
+            <div id="button-frame4">
+                <button onclick="stopMovement()" class="button-82-pushable" type="button">
                     <span class="button-82-shadow"></span>
                     <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-		      Start Train Movement
-                    </span>
-                  </button>
+                    <span class="button-82-front text">Stop Train Movement</span>
+                </button>
+            </div>
+            
+            <div id="button-frame5">
+                <button onclick="startMovement()" class="button-82-pushable" type="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">Start Train Movement</span>
+                </button>
             </div>
         </div>
-    </div>
+    </div> <!-- #frame-container closing tag restored -->
 
     <script>
         function startMovement() {
-            // Call the first POST URL
             fetch('/capture/startMovement', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command: "startMovement" })
-             });
+            });
         }
+
         function stopMovement() {
-            // Call the first POST URL
             fetch('/capture/stopMovement', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command: "stopMovement" })
-             });
+            });
         }
-      function startCapture() {
-            // Call the first POST URL
+
+        function startCapture() {
             fetch('/capture/start', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command: "start" })
-             });
+            });
         }
+
         function stopCapture() {
-            // Call the second POST URL
             fetch('/capture/stop', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command: "stop" })
-        });
+            });
         }
-		function connectReconnect() {
-            // Call the third POST URL
+
+        function connectReconnect() {
             fetch('/capture/connectReconnect', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ command: "connectReconnect" })
-             });
+            });
         }
+
         let lastImageTime = null;
 
         function startImageStream() {
-            // Start the image stream
             const source = new EventSource('/train-monitoring');
             source.onmessage = function(event) {
                 document.getElementById('stream-image').src = event.data; 
@@ -125,7 +117,6 @@
         }
       
         startImageStream();
-            
     </script>
 </body>
 </html>

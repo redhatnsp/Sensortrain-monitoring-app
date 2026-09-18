@@ -1,48 +1,95 @@
+
+
 @font-face {
     font-family: RedHat-bold;
     src: url('fonts/RedHatText-Bold.woff2') format('woff2');
-  }
-html, body {margin: 0; height: 100%; overflow: hidden}
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* Ensure the html and body take up the full viewport height */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Use viewport height instead of % */
+}
+
 html {
     background-color: white;
-    background-image: url('background.png');
+   /*  background-image: url('background.png'); */
     background-repeat: no-repeat;
+    background-position: center center;
     background-attachment: fixed;
     background-size: cover;
     font-family: 'RedHat-bold', Fallback, sans-serif;
 }
-body{
+
+body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
+
+/* Header Section */
 #header {
-    color: black;
-    position: absolute;
-    text-align: center;
+    position: static; /* Remove position: absolute */
     width: 100%;
-    top: 0;
+    text-align: center;
 }
+
 #header h1 {
     font-weight: normal;
-    text-align: center;
     color: white;
-    margin-top: 50px
+    margin: 0 0 10px 0; /* Clear huge top margins */
 }
-#frame-container {
-    height: fit-content;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background: #00000057;
-    border-radius: 10px;
+
+
+#train-id {
+    display: block;
+    margin: 15px auto 0 auto; /* Centers the image below the title */
+    width: 400px; /* Adjust width to your preferred size (e.g., 200px to 500px) */
+    max-width: 80%; /* Prevents it from overflowing small screens */
+    height: auto;
+}
+
+/* Middle Image Section */
+#image-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100%;
+}
+
+#stream-image {
+    display: block;
+    max-width: 90%;
+    max-height: 45vh; /* Scale image height dynamically so it leaves room */
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+
+
+/* Fix #frame-container so it fills the screen without hardcoding overflow */
+#frame-container {
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #00000057;
+    width: 100%;
+    
+    /* Flow elements top-to-bottom naturally */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start; /* Stack from top to bottom */
+    gap: 25px; /* Even spacing between Title -> Image -> Buttons */
+    padding: 30px 20px;
 }
+
+
 #image-frame img {
     box-shadow: 0 0 80px 30px #ffffff59;
     border-radius: 10px;
@@ -58,19 +105,22 @@ body{
 #commands{
     width: 100%;
     position: absolute;
-    bottom: -150px;
+    bottom: 30px;
 }
+/* Bottom Button Section */
 #button-frame {
-    display:flex;
-    gap: 30px;
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap cleanly on smaller screens */
+    gap: 15px;
     justify-content: center;
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    bottom: 0;
+    align-items: center;
+    width: 100%;
+    position: static; /* Remove absolute positioning */
+    margin: 0;
 }
+
 #button-frame > div {
-    margin: 25px 50px;
+    margin: 0; /* Reset conflicting margins */
 }
 
 button {
